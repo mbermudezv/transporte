@@ -15,8 +15,8 @@ try
     // 1: Solicitud Almuerzo
     // 2: Registro Almuerzo
     // 4: Registro Transporte
-    $getTipoMarca = 0;
-    if (isset($_GET['estudiante'])) { 
+    $getTipoMarca = 4;
+    if (isset($_GET['tipo'])) { 
         $getTipoMarca = $_GET['tipo'];
     }
 
@@ -115,8 +115,8 @@ function registrarMarca(intId, intTipo){
         $.post("sql/insertMarcaGestor.php", { id: intId, seleccion: intTipo })
         .done(function(data) {
             document.getElementById('txtMarca').value = '';
-            totalRegistros(intTipo);
-            muestraImagen();		   		
+            //totalRegistros(intTipo);
+            //muestraImagen();		   		
             }).fail(function(jqXHR, textStatus, error) {
                 console.log("Error de la aplicación: " + error);    			
                 $(body).append("Error al conectar con la base de datos: " + error);			
@@ -156,7 +156,7 @@ document.getElementById("txtMarca").onkeydown = function(evt) {
             // 2: Registro Almuerzo
             // 4: Registro Transporte        
             
-            // Registra marca transporte
+            // Registra marca transporte            
             if (intSeleccion==4) {registrarMarca(data.Id, intSeleccion);}
 		
         }).fail(function(jqXHR, textStatus, error) {
@@ -221,7 +221,7 @@ document.getElementById("txtMarca").onkeypress = function(evt) {
 window.onload = function() {
 	
 	intSeleccion=<?php echo $getTipoMarca; ?>;
-	totalRegistros(intSeleccion);
+	//totalRegistros(intSeleccion);
     document.getElementById("txtMarca").focus();
     return false;
 };
