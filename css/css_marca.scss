@@ -42,6 +42,7 @@ body {
 #mainArea {
     flex-grow: 1;
     display: flex;
+    justify-content: center;
 }
 
 .qrcode-text {padding-right:1.7em; margin-right:0}
@@ -99,8 +100,7 @@ body {
 
 #contenedorMarca{
 	display: flex;
-    flex-direction: column;
-    	
+    flex-direction: column;    
 }
 
 #divTitulo{

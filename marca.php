@@ -16,6 +16,7 @@ try
     // 2: Registro Almuerzo
     // 4: Registro Transporte
     $getTipoMarca = 4;
+
     if (isset($_GET['tipo'])) { 
         $getTipoMarca = $_GET['tipo'];
     }
@@ -27,7 +28,8 @@ try
     $estudiante_Cedula="";
 
     if (isset($_GET['estudiante'])) { 
-        $estudiante_Id = $_GET['estudiante'];   
+        $estudiante_Id = $_GET['estudiante'];
+        $db = new Select();   
         $rsEstudiante = $db->conEstudiante($estudiante_Id);    
         if (!empty($rsEstudiante)) {            
             foreach ($rsEstudiante as $key => $value) {
@@ -67,6 +69,7 @@ try
 
     <!-- Contenedor de proceso marca -->
     <div id="contenedorMarca">        
+        <div id="divTitulo"></div>
         <div id="divNombre"><?php echo $estudiante_Descripcion; ?></div>
         <div id="containerTxt">
             <input type="text" id="txtMarca" name="marca" maxlength="20" value="<?php echo $estudiante_Cedula; ?>">
@@ -74,6 +77,9 @@ try
         <div id="contenedorFrase">
             <img id="imagenMarca">
         </div>
+        <div id="contenedorFrase">
+            <img id="imagenMarca">
+        </div>        
     </div>
 
 </div>
@@ -94,11 +100,9 @@ function totalRegistros(intTipo) {
 
     $.get("sql/selectCountMarcasGestor.php", { tipoRegistro: intTipo })
     .done(function(data) {
-    if (intTipo==1) {
-        document.getElementById("divTitulo").innerHTML = strSolicitud + " " + data;		
-    } else if (intTipo==2) {
-        document.getElementById("divTitulo").innerHTML = strRegistro + " " + data;		
-    }
+            
+        document.getElementById("divTitulo").innerHTML = "Cantidad de Estudiantes: " + data;
+    
     }).fail(function(jqXHR, textStatus, error) {
     console.log("Error de la aplicación: " + error);
     });
@@ -115,8 +119,8 @@ function registrarMarca(intId, intTipo){
         $.post("sql/insertMarcaGestor.php", { id: intId, seleccion: intTipo })
         .done(function(data) {
             document.getElementById('txtMarca').value = '';
-            //totalRegistros(intTipo);
-            //muestraImagen();		   		
+            totalRegistros(intTipo);
+            muestraImagen();		   		
             }).fail(function(jqXHR, textStatus, error) {
                 console.log("Error de la aplicación: " + error);    			
                 $(body).append("Error al conectar con la base de datos: " + error);			
@@ -221,7 +225,7 @@ document.getElementById("txtMarca").onkeypress = function(evt) {
 window.onload = function() {
 	
 	intSeleccion=<?php echo $getTipoMarca; ?>;
-	//totalRegistros(intSeleccion);
+	totalRegistros(intSeleccion);
     document.getElementById("txtMarca").focus();
     return false;
 };
