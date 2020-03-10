@@ -27,7 +27,7 @@ $dir = "marca.php";
     <a id="salir" href="<?php echo $dir . "?tipo=" . $getTipoMarca; ?>"></a>
 </div> 
 <div id="mainArea">
-    <div id="contenedor_Fila"><input type="text" id="txtBuscar" name="buscar" value=""></div>
+    <div id="contenedor_Fila"><input type="text" onkeyup="enterBuscar(event)" id="txtBuscar" name="buscar" value=""></div>
     <div id="contenedor_Fila"><div id="btnbuscar" onclick="buscar();"></div></div>
     <div id="contenedor_Fila"><a id="hyp_cliente" class="cell"></a></div>         
 </div>
@@ -37,6 +37,12 @@ $dir = "marca.php";
 </div>
 
 <script language='javascript'>
+
+function enterBuscar(e){
+	if(e.keyCode == 13) {
+		buscar();
+	}
+}
 
 function buscar() {
 	
@@ -49,12 +55,12 @@ function buscar() {
 	$.getJSON("sql/selectEstudianteBusquedaGestor.php", { alias: strAlias })	
 	.done(function(data) {										
 	$.each(data, function(n, linkData) {
-				
+
 		var item = document.getElementById("contenedor_Fila");
 		var listItem = document.createElement('a');
 		var createAText = document.createTextNode(linkData.estudiante_Nombre + " " + 
-                                                    linkData.estudiante_PrimerApellido  + " " + 
-                                                    linkData.estudiante_SegundoApellido);
+										linkData.estudiante_PrimerApellido + " " + 
+										linkData.estudiante_SegundoApellido);
 		
 		listItem.className = "cell";
 		listItem.id = "hyp_cliente"	;

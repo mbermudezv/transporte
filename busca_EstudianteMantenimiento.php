@@ -26,7 +26,7 @@ $dir = "estudiante_Mantenimiento.php";
     <a id="salir" href="<?php echo $dir; ?>"></a>
 </div> 
 <div id="mainArea">
-    <div id="contenedor_Fila"><input type="text" id="txtBuscar" name="buscar" value=""></div>
+    <div id="contenedor_Fila"><input type="text"  id="txtBuscar" name="buscar" value=""></div>
     <div id="contenedor_Fila"><div id="btnbuscar" onclick="buscar();"></div></div>
     <div id="contenedor_Fila"><a id="hyp_cliente" class="cell"></a></div>         
 </div>
