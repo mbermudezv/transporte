@@ -44,8 +44,11 @@ if (!isset($_FILES['upexcel']['tmp_name']) || !in_array($_FILES['upexcel']['type
             $estudiante_Seccion = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
 
             $db = new insertExcel();
-            $db-> insertExcel($estudiante_Cedula, utf8_decode($estudiante_Nombre), 
-            utf8_decode($estudiante_PrimerApellido), utf8_decode($estudiante_SegundoApellido), $estudiante_Seccion);
+            // $db-> insertExcel($estudiante_Cedula, utf8_decode($estudiante_Nombre), 
+            // utf8_decode($estudiante_PrimerApellido), utf8_decode($estudiante_SegundoApellido), $estudiante_Seccion);
+            $db-> insertExcel($estudiante_Cedula, $estudiante_Nombre, 
+            $estudiante_PrimerApellido, $estudiante_SegundoApellido, $estudiante_Seccion);
+
 
             $db = null;	
             
